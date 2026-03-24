@@ -1,0 +1,87 @@
+{
+  "entities": {
+    "MenuItem": {
+      "title": "MenuItem",
+      "description": "A food or drink item in the menu.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "price": { "type": "number" },
+        "calories": { "type": "number" },
+        "category": { "type": "string" },
+        "image": { "type": "string" },
+        "isFeatured": { "type": "boolean" },
+        "isActive": { "type": "boolean" }
+      },
+      "required": ["name", "price", "category", "isActive"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "A customer order.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "items": {
+          "type": "array",
+          "items": { "$ref": "MenuItem" }
+        },
+        "total": { "type": "number" },
+        "status": { "type": "string", "enum": ["pending", "preparing", "ready", "delivered", "cancelled"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "type": { "type": "string", "enum": ["delivery", "pickup"] },
+        "address": { "type": "string" }
+      },
+      "required": ["userId", "items", "total", "status", "createdAt", "type"]
+    },
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile and loyalty information.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "points": { "type": "number" },
+        "tier": { "type": "string", "enum": ["Bronze", "Silver", "Gold"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "points", "tier"]
+    },
+    "Deal": {
+      "title": "Deal",
+      "description": "A promotional deal or offer.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "discount": { "type": "number" },
+        "expiresAt": { "type": "string", "format": "date-time" },
+        "image": { "type": "string" },
+        "isActive": { "type": "boolean" }
+      },
+      "required": ["title", "discount", "expiresAt", "isActive"]
+    }
+  },
+  "firestore": {
+    "/menu": {
+      "schema": "MenuItem",
+      "description": "Collection of menu items."
+    },
+    "/orders": {
+      "schema": "Order",
+      "description": "Collection of customer orders."
+    },
+    "/users": {
+      "schema": "UserProfile",
+      "description": "Collection of user profiles."
+    },
+    "/deals": {
+      "schema": "Deal",
+      "description": "Collection of promotional deals."
+    }
+  }
+}

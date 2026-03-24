@@ -1,0 +1,5 @@
+{
+  "name": "Burger King Website",
+  "description": "High-converting Burger King website plan with multi-page architecture, Royal Perks loyalty, and real-time menu tracking.",
+  "requestFramePermissions": ["geolocation"]
+}
